@@ -222,7 +222,7 @@ function addon:Initialize()
     addon:UpdateCombatWatch()
 
     -- Support mutliple talent specs on release (does not work for WoTLK at the moment)
-    if addon:ProjectIsRetail() or addon:ProjectIsWrath() or addon:ProjectIsCataclysm() then
+    if addon:ProjectIsRetail() or addon:ProjectIsWrath() or addon:ProjectIsCataclysm() or addon:ProjectIsSoD() then
         self:RegisterEvent("ACTIVE_TALENT_GROUP_CHANGED", "TalentGroupChanged")
         addon:TalentGroupChanged()
     end
@@ -878,7 +878,7 @@ end
 function addon:GameVersionHasTalentSpecs()
     if addon:ProjectIsRetail() then
         return true
-    elseif addon:ProjectIsWrath() or addon:ProjectIsCataclysm() then
+    elseif addon:ProjectIsWrath() or addon:ProjectIsCataclysm() or addon:ProjectIsSoD() then
         return true
     end
 
@@ -890,7 +890,7 @@ end
 function addon:GetActiveTalentSpec()
     if addon:ProjectIsRetail() then
         return GetSpecialization()
-    elseif addon:ProjectIsWrath() or addon:ProjectIsCataclysm() then
+    elseif addon:ProjectIsWrath() or addon:ProjectIsCataclysm() or addon:ProjectIsSoD() then
         return GetActiveTalentGroup()
     end
 
@@ -903,7 +903,7 @@ function addon:GetTalentSpecName(idx)
     if addon:ProjectIsRetail() then
         local _, specName = GetSpecializationInfo(idx)
         return specName
-    elseif addon:ProjectIsWrath() or addon:ProjectIsCataclysm() then
+    elseif addon:ProjectIsWrath() or addon:ProjectIsCataclysm() or addon:ProjectIsSoD() then
         if idx == 1 then
             return L["Primary"]
         elseif idx == 2 then
@@ -917,7 +917,7 @@ end
 function addon:GetNumTalentSpecs()
     if addon:ProjectIsRetail() then
         return GetNumSpecializations()
-    elseif addon:ProjectIsWrath() or addon:ProjectIsCataclysm() then
+    elseif addon:ProjectIsWrath() or addon:ProjectIsCataclysm() or addon:ProjectIsSoD() then
         return 2
     else
         return 0

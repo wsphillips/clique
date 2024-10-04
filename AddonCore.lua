@@ -32,6 +32,8 @@ local IsLoggedIn = IsLoggedIn
 local Mixin = Mixin
 local twipe = table.wipe
 local UIParent = UIParent
+local IsEngravingEnabled = C_Engraving and C_Engraving.IsEngravingEnabled
+local IsClassicSoD = IsEngravingEnabled and IsEngravingEnabled()
 
 -- Extract version information from TOC file
 addon.version = GetAddOnMetadata(addonName, "Version")
@@ -99,6 +101,10 @@ end
 
 function addon:ProjectIsClassic()
     return project_id == _G[projects.classic]
+end
+
+function addon:ProjectIsSoD()
+    return IsClassicSoD
 end
 
 function addon:ProjectIsBCC()
